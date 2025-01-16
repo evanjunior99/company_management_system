@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import Link from 'next/link';
+import Link from "next/link";
 
 const UsersToAssignTask: React.FC = () => {
   const [users, setUsers] = useState<any[]>([]);
@@ -28,10 +28,6 @@ const UsersToAssignTask: React.FC = () => {
     fetchUsers();
   }, []);
 
-  const handleAssignTask = (userId: number) => {
-    router.push(`/usersWork/`);
-  };
-
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">Assign Task</h2>
@@ -52,14 +48,9 @@ const UsersToAssignTask: React.FC = () => {
                 />
                 <span className="font-medium">{user.name || user.first_name}</span>
               </div>
-              <button
-                className="px-4 py-2 bg-blue-600 text-white rounded-md"
-                onClick={() => handleAssignTask(user.id)}
-              >
-                <Link href="/usersWork" className="text-white">
-                    Add New Task
-                </Link>
-              </button>
+              <Link href={`/user/${user.id}`} className="px-4 py-2 bg-blue-600 text-white rounded-md">
+                Add New Task
+              </Link>
             </div>
           ))
         )}
